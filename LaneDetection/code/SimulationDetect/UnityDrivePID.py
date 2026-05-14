@@ -12,7 +12,7 @@ import algorithm as algo
 BASE_URL = "http://localhost:8080"
 
 # Hedef hiz (km/h) - Ekrandaki butonlarla degistirilebilir
-TARGET_SPEED = 150  
+TARGET_SPEED = 70  
 
 state = {
     "steer": 0.0,
@@ -143,15 +143,15 @@ def main():
     threading.Thread(target=fetch_speed_loop, daemon=True).start()
     
     # PID Kontrolcu Parametreleri
-    Kp = 0.0032
+    Kp = 0.0031
     Ki = 0.00005  # Integral katsayisi
-    Kd = 0.16    # Dusuk Kd = daha az titresim
-    last_error = 0
-    integral = 0
+    Kd = 0.135    # Dusuk Kd = daha az titresim
+    last_error = 9.81  # Kalibrasyon sonucu sabit baslangic
+    integral = 1689.09  # Kalibrasyon sonucu sabit baslangic
     smoothed_steer = 0.0
-    last_derivative = 0.0 # Turev (D) sicramalarini onlemek icin
-    error_history = []  # Hata gecmisi (median filtre icin)
-    ERROR_HISTORY_SIZE = 7  # 5'ten 7'ye cikarildi, daha pruzsuz hata hesabi icin
+    last_derivative = 0.0
+    error_history = []
+    ERROR_HISTORY_SIZE = 7
     
     try:
         while state["running"]:
@@ -216,19 +216,21 @@ def main():
                                     smoothed_steer = (0.85 * smoothed_steer) + (0.15 * steer_val)
                                     state["steer"] = smoothed_steer
                                     
-                                    # Dinamik Hiz Kontrolu (Proportional Speed)
-                                    # Hedef hizin %10 eksiğine kadar tam gaz.
-                                    # Sonrasinda kademeli azaltma.
-                                    slowing_range = TARGET_SPEED * 0.1  # Oranti: 150'de 15 km/h
-                                    slowing_start = TARGET_SPEED - slowing_range
+                                    # Dinamik Hiz Kontrolu (Hataya Bagli)
+                                    # Hata buyudukce hedef hizi dusur (virajlarda yavasla)
+                                    error_ratio = min(abs(error) / 120.0, 1.0)  # 0-1 arasi normalize
+                                    effective_speed = TARGET_SPEED * (1.0 - error_ratio * 0.5)  # Max %50 dusus
+                                    effective_speed = max(30, effective_speed)  # En az 30 km/h
                                     
-                                    if state["speed_kmh"] >= TARGET_SPEED:
+                                    slowing_range = effective_speed * 0.1
+                                    slowing_start = effective_speed - slowing_range
+                                    
+                                    if state["speed_kmh"] >= effective_speed:
                                         state["forward"] = 0.0
                                     elif state["speed_kmh"] <= slowing_start:
                                         state["forward"] = 1.0 # Tam gaz
                                     else:
-                                        # slowing_start ile TARGET_SPEED arasinda kademeli azaltma
-                                        dynamic_gas = (TARGET_SPEED - state["speed_kmh"]) / slowing_range
+                                        dynamic_gas = (effective_speed - state["speed_kmh"]) / slowing_range
                                         state["forward"] = max(0.0, min(1.0, dynamic_gas))
                                         
                                     state["park"] = 0.0

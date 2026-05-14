@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3252.497, g: 2984.2637, b: 3092.625, a: 1}
+  m_IndirectSpecularColor: {r: 3248.5908, g: 2975.33, b: 3071.5977, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -116851,14 +116851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225175df2aa26e34dab61faee3c26184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableFog: 1
-  fogColor:
-    r: 0.85
-    g: 0.9
-    b: 0.95
-    a: 1
-  fogMode: 3
-  fogDensity: 0.02
 --- !u!43 &1832470271
 Mesh:
   m_ObjectHideFlags: 0
@@ -165035,57 +165027,6 @@ MonoBehaviour:
       vehicle speed (m/s, x axis).
     messageType: 0
     show: 1
-  availableForwardTorque:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1000
-      inSlope: 362.55988
-      outSlope: 362.55988
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.12901086
-    - serializedVersion: 3
-      time: 2
-      value: 5500
-      inSlope: -0.38623625
-      outSlope: -0.38623625
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.8903444
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 14
-      value: 5500
-      inSlope: -12.286913
-      outSlope: -12.286913
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1819532
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 44.06959
-      value: 2298.7544
-      inSlope: -55.863007
-      outSlope: -55.863007
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07249101
-      outWeight: 0.31647766
-    - serializedVersion: 3
-      time: 50.00833
-      value: 500
-      inSlope: -635.5122
-      outSlope: -635.5122
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11979406
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   availableReverseTorque:
     serializedVersion: 2
     m_Curve:
@@ -171325,7 +171266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4444885934011603316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.390625, y: -95.67857, z: 0.23706055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -174685,7 +174626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165080718478401117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6034.562, y: 54.288, z: -1630.409}
+  m_LocalPosition: {x: 6034.562, y: 150, z: -1630.409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

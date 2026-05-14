@@ -15,8 +15,8 @@ public class DemoCarController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private bool brakeToReverse = true;
     [SerializeField] private InfoText infoAboutCurves = new InfoText("The curves below describe available total wheel torque (Nm, y axis) vs vehicle speed (m/s, x axis).");
-    [SerializeField] private AnimationCurve availableForwardTorque = AnimationCurve.Constant(0, 50, 2700); // Hiz azaltildi (eski: 2700 Nm)
-    [SerializeField] private AnimationCurve availableReverseTorque = AnimationCurve.Linear(0, 2700, 15, 0);
+    private AnimationCurve availableForwardTorque = AnimationCurve.Constant(1000000000, 5000000000, 5000000000); // Hiz azaltildi (eski: 2700 Nm)
+    [SerializeField] private AnimationCurve availableReverseTorque = AnimationCurve.Linear(0, 50000, 15, 0);
     [SerializeField] [Tooltip("Print tutorial messages to console?")] private bool consoleMessages = true;
 
     [Header("Data")] // This is how you reference custom data, both for read and write purposes.
